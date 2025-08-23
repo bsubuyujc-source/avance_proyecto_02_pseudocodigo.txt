@@ -1,0 +1,49 @@
+INICIO
+
+    // ================================
+    // Programa: Registro de notas y cálculo de promedio
+    // Objetivo: Permitir al usuario registrar varias notas,
+    //           validarlas y calcular el promedio general.
+    // ================================
+
+    // Declaración de variables
+    DECLARAR N, i COMO ENTERO
+    DECLARAR nota, suma, promedio COMO REAL
+
+    suma ← 0
+
+    // Leer la cantidad de notas a registrar
+    IMPRIMIR "Ingrese la cantidad de notas a registrar: "
+    LEER N
+
+    // Validación: N debe ser mayor que 0
+    SI N <= 0 ENTONCES
+        IMPRIMIR "⚠️ Error: Debe ingresar al menos una nota."
+        FIN
+    FIN_SI
+
+    // Bucle para ingresar N notas
+    PARA i ← 1 HASTA N HACER
+
+        REPETIR
+            IMPRIMIR "Ingrese la nota ", i, " (0 a 100): "
+            LEER nota
+
+            // Validación: debe ser número válido en el rango [0..100]
+            SI nota < 0 O nota > 100 ENTONCES
+                IMPRIMIR "⚠️ Nota inválida. Intente nuevamente."
+            FIN_SI
+
+        HASTA QUE nota >= 0 Y nota <= 100
+
+        suma ← suma + nota
+
+    FIN_PARA
+
+    // Calcular el promedio
+    promedio ← suma / N
+
+    // Mostrar el promedio
+    IMPRIMIR "El promedio general de las notas es: ", promedio
+
+FIN
