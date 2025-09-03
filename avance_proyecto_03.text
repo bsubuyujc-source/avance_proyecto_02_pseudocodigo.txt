@@ -1,0 +1,83 @@
+cursos = []
+
+def registrar_curso():
+    nombre = input("Ingrese el nombre del curso: ").strip()
+    if not nombre:  # Condicional
+        print("El nombre no puede estar vacío.")
+        return
+    try:
+        nota = int(input("Ingrese la nota obtenida (0-100): "))
+        if 0 <= nota <= 100:  # Condicional
+            cursos.append({"nombre": nombre, "nota": nota})
+            print("Curso registrado con éxito.")
+        else:
+            print("La nota debe estar entre 0 y 100.")
+    except ValueError:
+        print("Debe ingresar un número válido.")
+
+def mostrar_cursos():
+    if not cursos:  # Condicional
+        print("No hay cursos registrados.")
+    else:
+        print("Cursos registrados:")
+        for i, curso in enumerate(cursos, start=1):
+            print(f"{i}. {curso['nombre']} - Nota: {curso['nota']}")
+
+def contar_aprobados_reprobados():
+    aprobados = sum(1 for c in cursos if c["nota"] >= 60)  # Contadores
+    reprobados = len(cursos) - aprobados
+    print(f"Cursos aprobados: {aprobados}")
+    print(f"Cursos reprobados: {reprobados}")
+
+def buscar_lineal():
+    nombre = input("Ingrese el curso a buscar: ").strip().lower()
+    for curso in cursos:  # Búsqueda lineal
+        if nombre in curso["nombre"].lower():
+            print(f"Curso encontrado: {curso['nombre']} - Nota: {curso['nota']}")
+            return
+    print("Curso no encontrado.")
+
+def actualizar_nota():
+    nombre = input("Ingrese el curso a actualizar: ").strip().lower()
+    for curso in cursos:
+        if nombre == curso["nombre"].lower():
+            try:
+                nueva = int(input("Ingrese la nueva nota: "))
+                if 0 <= nueva <= 100:  # Condicional
+                    curso["nota"] = nueva
+                    print("Nota actualizada correctamente.")
+                else:
+                    print("La nota debe estar entre 0 y 100.")
+            except ValueError:
+                print("Debe ingresar un número válido.")
+            return
+    print("Curso no encontrado.")
+
+def menu():
+    while True:
+        print("\n====== AVANCE PROYECTO 03 ======")
+        print("1. Registrar curso")
+        print("2. Mostrar cursos")
+        print("3. Contar aprobados y reprobados")
+        print("4. Buscar curso (lineal)")
+        print("5. Actualizar nota")
+        print("6. Salir")
+        opcion = input("Seleccione una opción: ")
+        if opcion == "1":
+            registrar_curso()
+        elif opcion == "2":
+            mostrar_cursos()
+        elif opcion == "3":
+            contar_aprobados_reprobados()
+        elif opcion == "4":
+            buscar_lineal()
+        elif opcion == "5":
+            actualizar_nota()
+        elif opcion == "6":
+            print("Fin del avance.")
+            break
+        else:
+            print("Opción inválida.")
+
+if __name__ == "__main__":
+    menu()
